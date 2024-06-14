@@ -17,6 +17,7 @@
 	let conversation = [];
 	async function download() {
 		videoUrl = [];
+		conversation = [];
 		loading = true;
 		if (link.includes('youtube.com/watch?v=')) {
 			link_id = link.split('watch?v=')[1].split('&')[0];
@@ -34,9 +35,9 @@
 				transcript = res.data.transcript;
 				thumbnail = data.videoDetails.thumbnails[data.videoDetails.thumbnails.length - 1].url;
 				title = data.videoDetails.title;
-				console.log(
-					data.player_response.captions.playerCaptionsTracklistRenderer.captionTracks[0].baseUrl
-				);
+				// console.log(
+				// 	data.player_response.captions.playerCaptionsTracklistRenderer.captionTracks[0].baseUrl
+				// );
 				data.formats.forEach((vid) => {
 					if (vid.hasAudio && vid.hasVideo) {
 						videoUrl = [
@@ -48,8 +49,9 @@
 						];
 					}
 				});
-				console.log(data);
+				// console.log(data);
 				summary = res.data.summary;
+				// console.log(res.data);
 				conversation = [
 					...conversation,
 					{
@@ -116,50 +118,52 @@
 </div>
 
 <div class="mt-3">
-	{#if loading}
-		<div class="flex mt-5 justify-center items-center h-8 gap-3">
-			<i class="bx bx-cog animate-spin"></i>
-			<div class="text-sm">loading, this might take some time</div>
-		</div>
-	{:else if loadedcontent}
-		<div class=" border rounded-lg border-[#353535] bg-[#171717]">
-			<img src={thumbnail} alt={title} class="rounded-md rounded-b-sm" />
-			<div class="p-2 text-center truncate">
-				{title}
+	<div class="w-[90vw] md:w-96">
+		{#if loading}
+			<div class="flex mt-5 justify-center items-center h-8 gap-3">
+				<i class="bx bx-cog animate-spin"></i>
+				<div class="text-sm">loading, this might take some time</div>
 			</div>
-		</div>
-	{/if}
-	{#if summary}
-		<div class="">
-			{#each conversation as msgs}
-				<div class="mt-2">
-					{msgs.sender}: <span class="opacity-60">{@html parse(msgs.text)}</span>
-				</div>
-			{/each}
-		</div>
-		{#if loadingAnswer}
-			<div>
-				<div class="flex mt-5 justify-center items-center h-8 gap-3">
-					<i class="bx bx-cog animate-spin"></i>
-					<div>AI is typing</div>
+		{:else if loadedcontent}
+			<div class=" border rounded-lg border-[#353535] bg-[#171717]">
+				<img src={thumbnail} alt={title} class="rounded-md rounded-b-sm" />
+				<div class="p-2 text-center truncate">
+					{title}
 				</div>
 			</div>
 		{/if}
-		<div class="flex p-2 gap-3 justify-center items-center">
-			<input
-				disabled={loadingAnswer}
-				bind:value={followupQuestion}
-				placeholder="Tell me more"
-				type="text"
-				class="text-sm px-2 h-8 rounded bg-[#252525] text-white border border-[#353535]"
-			/>
-			<button
-				disabled={loadingAnswer}
-				on:click={followup}
-				class="p-2 rounded-lg border border-[#353535] bg-[#171717] flex justify-center items-center"
-			>
-				<i class="bx bx-send"></i>
-			</button>
-		</div>
-	{/if}
+		{#if summary}
+			<div class="">
+				{#each conversation as msgs}
+					<div class="mt-2">
+						{msgs.sender}: <span class="opacity-60">{@html parse(msgs.text)}</span>
+					</div>
+				{/each}
+			</div>
+			{#if loadingAnswer}
+				<div>
+					<div class="flex mt-5 justify-center items-center h-8 gap-3">
+						<i class="bx bx-cog animate-spin"></i>
+						<div>AI is typing</div>
+					</div>
+				</div>
+			{/if}
+			<div class="flex p-2 gap-3 justify-center items-center">
+				<input
+					disabled={loadingAnswer}
+					bind:value={followupQuestion}
+					placeholder="Tell me more"
+					type="text"
+					class="text-sm px-2 h-8 rounded bg-[#252525] text-white border border-[#353535]"
+				/>
+				<button
+					disabled={loadingAnswer}
+					on:click={followup}
+					class="p-2 rounded-lg border border-[#353535] bg-[#171717] flex justify-center items-center"
+				>
+					<i class="bx bx-send"></i>
+				</button>
+			</div>
+		{/if}
+	</div>
 </div>
