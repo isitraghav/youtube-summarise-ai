@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@distube/ytdl-core':
-        specifier: ^4.13.4
-        version: 4.13.4
+        specifier: ^4.14.4
+        version: 4.14.4
       '@gradio/client':
         specifier: ^1.1.1
         version: 1.1.1
@@ -77,9 +77,9 @@ packages:
   '@bundled-es-modules/statuses@1.0.1':
     resolution: {integrity: sha512-yn7BklA5acgcBr+7w064fGV+SGIFySjCKpqjcWgBAIfrAkY+4GQTJJHQMeT3V/sgz23VTEVV8TtOmkvJAhFVfg==}
 
-  '@distube/ytdl-core@4.13.4':
-    resolution: {integrity: sha512-AMuKFWN8MHq+gtlhMq2O4jMm7KNtFbXpFMxK6NgDsyMxZT+obH+wVCu/2sj+ZBn6HOnGofvrmb6kAx0P59+lFw==}
-    engines: {node: '>=16'}
+  '@distube/ytdl-core@4.14.4':
+    resolution: {integrity: sha512-dHb4GW3qATIjRsS6VIhm3Pop7FdUcDFhsnyQlsPeXW7UhTPuNS0BmraKiTpFbpp0Ky+rxBQjJBfPRFsM+dT1fg==}
+    engines: {node: '>=14.0'}
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -218,6 +218,10 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@fastify/busboy@2.1.1':
+    resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
+    engines: {node: '>=14'}
 
   '@floating-ui/core@1.6.2':
     resolution: {integrity: sha512-+2XpQV9LLZeanU4ZevzRnGFg2neDeKHgFLjP6YLW+tly0IvrhqT4u8enLGjLH3qeh85g19xY5rsAusfwTdn5lg==}
@@ -1198,9 +1202,9 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
-  undici@6.18.2:
-    resolution: {integrity: sha512-o/MQLTwRm9IVhOqhZ0NQ9oXax1ygPjw6Vs+Vq/4QRjbOAC3B1GCHy7TYxxbExKlb7bzDRzt9vBWU6BDz0RFfYg==}
-    engines: {node: '>=18.17'}
+  undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
 
   universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
@@ -1317,14 +1321,14 @@ snapshots:
     dependencies:
       statuses: 2.0.1
 
-  '@distube/ytdl-core@4.13.4':
+  '@distube/ytdl-core@4.14.4':
     dependencies:
-      http-cookie-agent: 6.0.5(tough-cookie@4.1.4)(undici@6.18.2)
+      http-cookie-agent: 6.0.5(tough-cookie@4.1.4)(undici@5.28.4)
       m3u8stream: 0.8.6
       miniget: 4.2.3
       sax: 1.4.1
       tough-cookie: 4.1.4
-      undici: 6.18.2
+      undici: 5.28.4
     transitivePeerDependencies:
       - supports-color
 
@@ -1396,6 +1400,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.20.2':
     optional: true
+
+  '@fastify/busboy@2.1.1': {}
 
   '@floating-ui/core@1.6.2':
     dependencies:
@@ -1935,12 +1941,12 @@ snapshots:
 
   headers-polyfill@4.0.3: {}
 
-  http-cookie-agent@6.0.5(tough-cookie@4.1.4)(undici@6.18.2):
+  http-cookie-agent@6.0.5(tough-cookie@4.1.4)(undici@5.28.4):
     dependencies:
       agent-base: 7.1.1
       tough-cookie: 4.1.4
     optionalDependencies:
-      undici: 6.18.2
+      undici: 5.28.4
     transitivePeerDependencies:
       - supports-color
 
@@ -2363,7 +2369,9 @@ snapshots:
 
   undici-types@5.26.5: {}
 
-  undici@6.18.2: {}
+  undici@5.28.4:
+    dependencies:
+      '@fastify/busboy': 2.1.1
 
   universalify@0.2.0: {}
 
